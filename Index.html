@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>সূর্য তরুণ ক্লাব ও সূর্য তরুণ ব্লাড ডোনার ক্লাব</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+
+        body {
+            background-color: #fdf2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Hind Siliguri', sans-serif;
+            perspective: 1500px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .book {
+            position: relative;
+            width: 280px;
+            height: 400px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
+            z-index: 5;
+        }
+
+        .book.open {
+            transform: translateX(50px);
+        }
+
+        .cover, .content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 0 10px 10px 0;
+            transform-style: preserve-3d;
+        }
+
+        .cover {
+            z-index: 10;
+            transform-origin: left;
+            transition: transform 1s ease-in-out;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .cover-front, .cover-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .cover-front {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: white;
+            border-left: 5px solid #8b0000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .cover-back {
+            background: #b71c1c; 
+            transform: rotateY(180deg);
+            border-right: 5px solid #8b0000;
+        }
+
+        .content {
+            background: #fff;
+            z-index: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: inset 5px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .book.open .cover {
+            transform: rotateY(-160deg);
+        }
+
+        .moon-icon { font-size: 70px; filter: drop-shadow(0 0 10px #ffd700); }
+        .cover h1 { font-size: 20px; margin-top: 15px; text-align: center; color: white; line-height: 1.4; }
+        
+        .content h2 { color: #d32f2f; font-size: 18px; margin-bottom: 5px; }
+        .content p { font-size: 13px; color: #333; line-height: 1.4; margin: 4px 0; }
+
+        .donation-box {
+            background-color: #fff9c4;
+            border: 2px dashed #fbc02d;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .contact-box {
+            background-color: #e8f5e9;
+            border: 1px solid #4caf50;
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 5px;
+            font-size: 13px;
+            color: #2e7d32;
+        }
+
+        /* টেক্সট এরিয়া ফিক্স */
+        .status-area {
+            margin-top: 30px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .hint, .dev-name {
+            color: #888; /* ধূসর কালার */
+            font-size: 14px;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+        }
+
+        .dev-name {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* বই খোলার পর Hint যাবে এবং Dev Name আসবে */
+        .book.open ~ .status-area .hint {
+            opacity: 0;
+        }
+
+        .book.open ~ .status-area .dev-name {
+            opacity: 1;
+        }
+
+        /* নিচের বারটি সরিয়ে দেওয়া হয়েছে কারণ আপনি টেক্সট স্টাইল পরিবর্তন করতে বলেছেন */
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="book" id="myBook" onclick="this.classList.toggle('open')">
+            <div class="cover">
+                <div class="cover-front">
+                    <div class="moon-icon">🌙</div>
+                    <h1>রমজানের আলোয় মানবতার হাতছানি</h1>
+                    <p style="font-size: 12px; opacity: 0.9; margin-top: 10px;">সূর্য তরুণ সংগঠন</p>
+                </div>
+                <div class="cover-back"></div>
+            </div>
+
+            <div class="content">
+                <h2>🌙 অনুদানের আহ্বান</h2>
+                <p><b>সূর্য তরুণ সংগঠন ও সূর্য তরুণ ব্লাড ডোনার ক্লাবের</b> উদ্যোগে দুস্থ পরিবারদের ইফতার সামগ্রী বিতরণে আপনার সাহায্য কাম্য।</p>
+                
+                <div class="donation-box">
+                    অনুদানের জন্য:<br>
+                    <span style="font-size: 17px;">01856423090</span> (বিকাশ/নগদ)
+                </div>
+
+                <div class="contact-box">
+                    📞 যোগাযোগ:<br>
+                    <b>01322210194</b> (WhatsApp)
+                </div>
+                
+                <p style="font-size: 11px; color: #666; margin-top: 10px;"> 
+                প্রবাসী ভাই ও সমাজের দানশীল সকলের সহযোগিতা কাম্য।
+আপনার সামান্য দানেই
+একটি পরিবার রমজানে হাসিমুখে ইফতার করতে পারবে। 🤲</p>
+            </div>
+        </div>
+
+        <div class="status-area">
+            <div class="hint">বইটি খুলতে টাচ করুন</div>
+            <div class="dev-name">Developed by: Md Rimon</div>
+        </div>
+    </div>
+
+</body>
+</html>
